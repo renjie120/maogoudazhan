@@ -5,13 +5,16 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Choreographer.FrameCallback;
 import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabWidget;
+
 import com.maogoudazhan.tool.Constant;
 
 /**
@@ -77,39 +80,39 @@ public class HomePageActivity extends TabActivity {
 		screenHeight = screen2[1];
 		screenWidth = screen2[0];
 
-		final TabHost tabHost = this.getTabHost();
+		final TabHost tabHost = this.getTabHost(); 
 		final TabWidget tabWidget = tabHost.getTabWidget();
 
 		// 设置第一个tab页的对应的intent布局
 		TabHost.TabSpec tabSpec = tabHost.newTabSpec(Tab1);
-		tabSpec.setIndicator(composeLayout(R.drawable.nav_tuijian_act,screenWidth));
+		tabSpec.setIndicator(composeLayout(R.drawable.nav_tuijian_act,screenWidth,screenHeight));
 		tabSpec.setContent(new Intent(HomePageActivity.this,
 				NewHomeActivity.class).putExtra("url", TUIJIAN_URL));
 		tabHost.addTab(tabSpec);
 
 		// 设置第二个tab页的对应的intent布局
 		TabHost.TabSpec tabSpec2 = tabHost.newTabSpec(Tab2);
-		tabSpec2.setIndicator(composeLayout(R.drawable.nav_ziliao_off,screenWidth));
+		tabSpec2.setIndicator(composeLayout(R.drawable.nav_ziliao_off,screenWidth,screenHeight));
 		tabSpec2.setContent(new Intent(HomePageActivity.this,
 				NewHomeActivity.class).putExtra("url", ZILIAO_URL));
 		tabHost.addTab(tabSpec2);
 
 		// 设置第三个tab页的对应的intent布局
 		TabHost.TabSpec tabSpec3 = tabHost.newTabSpec(Tab3);
-		tabSpec3.setIndicator(composeLayout(R.drawable.nav_gonglue_off,screenWidth));
+		tabSpec3.setIndicator(composeLayout(R.drawable.nav_gonglue_off,screenWidth,screenHeight));
 		tabSpec3.setContent(new Intent(HomePageActivity.this,
 				NewHomeActivity.class).putExtra("url", GONGLUE_URL));
 		tabHost.addTab(tabSpec3);
 
 		// 设置第四个tab页的对应的intent布局
 		TabHost.TabSpec tabSpec4 = tabHost.newTabSpec(Tab4);
-		tabSpec4.setIndicator(composeLayout(R.drawable.nav_settings_off,screenWidth));
+		tabSpec4.setIndicator(composeLayout(R.drawable.nav_settings_off,screenWidth,screenHeight));
 		tabSpec4.setContent(new Intent(HomePageActivity.this,
 				NewHomeActivity.class).putExtra("url", CONFIG_URL));
 		tabHost.addTab(tabSpec4);
 
 		TabHost.TabSpec tabSpec5 = tabHost.newTabSpec(Tab5);
-		tabSpec5.setIndicator(composeLayout(R.drawable.nav_more_off,screenWidth));
+		tabSpec5.setIndicator(composeLayout(R.drawable.nav_more_off,screenWidth,screenHeight));
 		tabSpec5.setContent(new Intent(HomePageActivity.this,
 				NewHomeActivity.class).putExtra("url", GENGDUO_URL));
 		tabHost.addTab(tabSpec5);
@@ -179,14 +182,14 @@ public class HomePageActivity extends TabActivity {
 	 * @return
 	 */
 	@SuppressLint("NewApi")
-	public View composeLayout(int i,float screenWidth) {
+	public View composeLayout(int i,float screenWidth,float screenHeight) {
 		LinearLayout layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL); 
 		ImageView iv = new ImageView(this);
 		iv.setImageResource(i);
 		iv.setBackgroundColor(getResources().getColor(R.color.blue));
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.FILL_PARENT,
+				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.FILL_PARENT);
 		lp.setMargins(0, 0, 0, 0);
 		iv.setLayoutParams(lp);
