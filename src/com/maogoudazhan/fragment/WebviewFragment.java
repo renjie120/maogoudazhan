@@ -3,7 +3,10 @@ package com.maogoudazhan.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -23,6 +26,7 @@ import com.maogoudazhan.activity.R;
  * @author 130126
  * 
  */
+@SuppressLint("ValidFragment")
 public class WebviewFragment extends BaseFragment {
 	public static final String URL = "url";
 	private WebView mWebView;
@@ -72,6 +76,23 @@ public class WebviewFragment extends BaseFragment {
 		mWebView.loadUrl(url);
 	}
 
+	public static boolean isNetworkConnected(Context context) {
+		try {
+			if (context != null) {
+				ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+						.getSystemService(Context.CONNECTIVITY_SERVICE);
+				NetworkInfo mNetworkInfo = mConnectivityManager
+						.getActiveNetworkInfo();
+				if (mNetworkInfo != null) {
+					return mNetworkInfo.isAvailable();
+				}
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return false;
+	}
+
 	@SuppressLint("JavascriptInterface")
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -100,8 +121,12 @@ public class WebviewFragment extends BaseFragment {
 		// 支持html5的存储。。。
 		mWebView.getSettings().setDomStorageEnabled(true);
 		// 加这句话，去掉webview里面的缓存。。
-		mWebView.getSettings()
-				.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+		if (isNetworkConnected(getActivity()))
+			mWebView.getSettings().setCacheMode(
+					WebSettings.LOAD_DEFAULT);
+		else
+			mWebView.getSettings().setCacheMode(
+					WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		mWebView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
 		String appCachePath = getApplicationContext().getCacheDir()
 				.getAbsolutePath();

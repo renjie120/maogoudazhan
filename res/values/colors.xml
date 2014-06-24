@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
+    <color name="homepage_bottom">#c8c8c8</color>
     <color name="blue">#4fc1e9</color> 
 </resources>

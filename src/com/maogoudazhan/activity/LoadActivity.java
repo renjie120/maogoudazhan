@@ -25,7 +25,7 @@ public class LoadActivity extends Activity {
 			public void run() {
 				// 经过指定时间之后自动跳转到后面的第一个首页面.
 				Intent mainIntent = new Intent(LoadActivity.this,
-						MainActivity2.class);
+						MainActivity.class);
 				LoadActivity.this.startActivity(mainIntent);
 				LoadActivity.this.finish();
 			}
