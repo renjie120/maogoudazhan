@@ -52,6 +52,7 @@ public class NewHomeActivity extends FragmentActivity implements
 		setContentView(R.layout.new_home);
 		all = (LinearLayout) findViewById(R.id.all);
 		url = getIntent().getStringExtra("url");
+		//设置第一个tab的片段.
 		Bundle args = new Bundle();
 		args.putString(WebviewFragment.URL, url);
 		WebviewFragment newFragment =new WebviewFragment();//.getInstance();

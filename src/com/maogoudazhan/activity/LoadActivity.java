@@ -23,9 +23,9 @@ public class LoadActivity extends Activity {
 
 		new Handler().postDelayed(new Runnable() {
 			public void run() {
-				// Go to main activity, and finish load activity
+				// 经过指定时间之后自动跳转到后面的第一个首页面.
 				Intent mainIntent = new Intent(LoadActivity.this,
-						MainActivity.class);
+						MainActivity2.class);
 				LoadActivity.this.startActivity(mainIntent);
 				LoadActivity.this.finish();
 			}
