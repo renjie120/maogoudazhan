@@ -54,9 +54,9 @@ public class NewHomeActivity extends FragmentActivity implements
 		url = getIntent().getStringExtra("url");
 		Bundle args = new Bundle();
 		args.putString(WebviewFragment.URL, url);
-		WebviewFragment newFragment = new WebviewFragment();
+		WebviewFragment newFragment =new WebviewFragment();//.getInstance();
 		FragmentTransaction transaction = getSupportFragmentManager()
-				.beginTransaction(); 
+				.beginTransaction();
 		// 设置参数
 		newFragment.setArguments(args);
 		transaction.replace(R.id.tab_content, newFragment);

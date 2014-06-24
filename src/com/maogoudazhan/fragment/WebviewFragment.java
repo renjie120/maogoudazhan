@@ -34,6 +34,21 @@ public class WebviewFragment extends BaseFragment {
 
 	}
 
+	public WebviewFragment(String url) {
+		this.url = url;
+	}
+
+	public WebviewFragment() {
+	}
+
+	// private static class SingletonHolder {
+	// public final static WebviewFragment instance = new WebviewFragment();
+	// }
+	//
+	// public static WebviewFragment getInstance() {
+	// return SingletonHolder.instance;
+	// }
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -51,6 +66,12 @@ public class WebviewFragment extends BaseFragment {
 		return inflater.inflate(R.layout.webviewdemo, container, false);
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		mWebView.loadUrl(url);
+	}
+
 	@SuppressLint("JavascriptInterface")
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -61,7 +82,8 @@ public class WebviewFragment extends BaseFragment {
 				return false;
 			}
 		});
-		url = getArguments().getString(WebviewFragment.URL);
+		if (getArguments() != null)
+			url = getArguments().getString(WebviewFragment.URL);
 		WebSettings webSettings = mWebView.getSettings();
 		System.out.println("url==========" + url);
 		webSettings.setJavaScriptEnabled(true);
@@ -75,8 +97,11 @@ public class WebviewFragment extends BaseFragment {
 				});
 			}
 		}, "weixin");
-		//支持html5的存储。。。
+		// 支持html5的存储。。。
 		mWebView.getSettings().setDomStorageEnabled(true);
+		// 加这句话，去掉webview里面的缓存。。
+		mWebView.getSettings()
+				.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		mWebView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
 		String appCachePath = getApplicationContext().getCacheDir()
 				.getAbsolutePath();

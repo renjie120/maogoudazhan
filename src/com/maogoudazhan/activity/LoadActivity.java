@@ -25,7 +25,7 @@ public class LoadActivity extends Activity {
 			public void run() {
 				// Go to main activity, and finish load activity
 				Intent mainIntent = new Intent(LoadActivity.this,
-						HomePageActivity.class);
+						MainActivity.class);
 				LoadActivity.this.startActivity(mainIntent);
 				LoadActivity.this.finish();
 			}
