@@ -1,5 +1,7 @@
 package com.maogoudazhan.fragment;
 
+import java.io.File;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -8,13 +10,15 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
+import android.webkit.WebStorage;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -53,7 +57,6 @@ public class WebviewFragment extends BaseFragment {
 	// public static WebviewFragment getInstance() {
 	// return SingletonHolder.instance;
 	// }
-	
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -75,7 +78,7 @@ public class WebviewFragment extends BaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		System.out.println("进入的webview-----------"+url);
+		System.out.println("进入的webview-----------" + url);
 		mWebView.loadUrl(url);
 	}
 
@@ -130,13 +133,22 @@ public class WebviewFragment extends BaseFragment {
 			mWebView.getSettings().setCacheMode(
 					WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		mWebView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
-		String appCachePath = getApplicationContext().getCacheDir()
-				.getAbsolutePath();
+		// String appCachePath = getApplicationContext().getCacheDir()
+		// .getAbsolutePath();
+		String appCachePath = getApplicationContext().getDir("cache",
+				Context.MODE_PRIVATE).getPath();
+//		File extDir = Environment.getExternalStorageDirectory();
+//		// 目录
+//		String appCachePath = extDir.getAbsolutePath() + "/dlpfiles";
+
+		System.out.println("appCachePath===" + appCachePath);
 		mWebView.getSettings().setAppCachePath(appCachePath);
 		mWebView.getSettings().setAllowFileAccess(true);
 		mWebView.getSettings().setAppCacheEnabled(true);
 
 		mWebView.setWebViewClient(new WebViewClient());
+		// mWebView.setWebChromeClient(m_chromeClient);
+
 		if (url == null || "null".equals(url))
 			mWebView.loadUrl("http://www.baidu.com");
 		else {
@@ -144,6 +156,15 @@ public class WebviewFragment extends BaseFragment {
 			mWebView.loadUrl(url);
 		}
 	}
+
+	private WebChromeClient m_chromeClient = new WebChromeClient() {
+		// 扩充缓存的容量
+		@Override
+		public void onReachedMaxAppCacheSize(long spaceNeeded,
+				long totalUsedQuota, WebStorage.QuotaUpdater quotaUpdater) {
+			quotaUpdater.updateQuota(spaceNeeded * 2);
+		}
+	};
 
 	/**
 	 * 打开新浪
