@@ -77,8 +77,7 @@ public class WebviewFragment extends BaseFragment {
 
 	@Override
 	public void onResume() {
-		super.onResume();
-		System.out.println("进入的webview-----------" + url);
+		super.onResume(); 
 		mWebView.loadUrl(url);
 	}
 
@@ -111,8 +110,7 @@ public class WebviewFragment extends BaseFragment {
 		});
 		if (getArguments() != null)
 			url = getArguments().getString(WebviewFragment.URL);
-		WebSettings webSettings = mWebView.getSettings();
-		System.out.println("url==========" + url);
+		WebSettings webSettings = mWebView.getSettings(); 
 		webSettings.setJavaScriptEnabled(true);
 		webSettings.setUserAgentString("APP-Android");
 		mWebView.addJavascriptInterface(new Object() {
@@ -132,16 +130,21 @@ public class WebviewFragment extends BaseFragment {
 		else
 			mWebView.getSettings().setCacheMode(
 					WebSettings.LOAD_CACHE_ELSE_NETWORK);
+		
 		mWebView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
 		// String appCachePath = getApplicationContext().getCacheDir()
 		// .getAbsolutePath();
 		String appCachePath = getApplicationContext().getDir("cache",
 				Context.MODE_PRIVATE).getPath();
-//		File extDir = Environment.getExternalStorageDirectory();
-//		// 目录
-//		String appCachePath = extDir.getAbsolutePath() + "/dlpfiles";
-
-		System.out.println("appCachePath===" + appCachePath);
+		// File extDir = Environment.getExternalStorageDirectory();
+		// // 目录
+		// String appCachePath = extDir.getAbsolutePath() + "/dlpfiles";
+		mWebView.getSettings().setDatabaseEnabled(true);
+		String dbPath = getApplicationContext().getDir("database",
+				Context.MODE_PRIVATE).getPath();
+		mWebView.getSettings().setDatabasePath(dbPath);
+		
+		 
 		mWebView.getSettings().setAppCachePath(appCachePath);
 		mWebView.getSettings().setAllowFileAccess(true);
 		mWebView.getSettings().setAppCacheEnabled(true);

@@ -6,8 +6,10 @@ import java.util.List;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -38,6 +40,36 @@ public class MainActivity extends FragmentActivity implements OnWebViewListener 
 		return new float[] { dm.widthPixels, dm.heightPixels };
 	}
 
+	public void ck(View v) {
+		if (v.getId() == R.id.tab_rb_a) {
+			onShowUrl(HomePageActivity.TUIJIAN_URL);
+		} else if (v.getId() == R.id.tab_rb_b) {
+			onShowUrl(HomePageActivity.ZILIAO_URL);
+		} else if (v.getId() == R.id.tab_rb_c) {
+			onShowUrl(HomePageActivity.GONGLUE_URL);
+		} else if (v.getId() == R.id.tab_rb_d) {
+			onShowUrl(HomePageActivity.CONFIG_URL);
+		} else if (v.getId() == R.id.tab_rb_e) {
+			onShowUrl(HomePageActivity.GENGDUO_URL);
+		}
+	}
+
+	public void onShowUrl(String url ) {
+		Bundle args = new Bundle();
+		args.putString(WebviewFragment.URL, url); 
+		// web页面的碎片
+		WebviewFragment newFragment = new WebviewFragment();
+		FragmentTransaction transaction = getSupportFragmentManager()
+				.beginTransaction();
+		// 动画
+		transaction.setCustomAnimations(R.anim.slide_left_in,
+				R.anim.slide_left_out);
+		// 设置参数
+		newFragment.setArguments(args);
+		transaction.replace(R.id.tab_content, newFragment); 
+		transaction.commit();
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,6 +88,7 @@ public class MainActivity extends FragmentActivity implements OnWebViewListener 
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT, (int) (size[1] * 0.07));
 		rgs.setLayoutParams(lp);
+
 		tabAdapter = new FragmentTabAdapter(this, fragments, R.id.tab_content,
 				rgs);
 		tabAdapter
