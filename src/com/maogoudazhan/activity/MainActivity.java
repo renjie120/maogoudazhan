@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.maogoudazhan.fragment.WebviewFragment;
 import com.maogoudazhan.fragment.WebviewFragment.OnWebViewListener;
@@ -49,11 +51,10 @@ public class MainActivity extends FragmentActivity implements OnWebViewListener 
 		fragments.add(new WebviewFragment(HomePageActivity.CONFIG_URL));
 		fragments.add(new WebviewFragment(HomePageActivity.GENGDUO_URL));
 		float[] size = getScreen2();
-		System.out.println("宽度："+size[0]+",,--高度："+size[1]);
+		System.out.println("宽度：" + size[0] + ",,--高度：" + size[1]);
 		rgs = (RadioGroup) findViewById(R.id.tabs_rg);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT,
-				(int)(size[1]*0.07));
+				LinearLayout.LayoutParams.MATCH_PARENT, (int) (size[1] * 0.07));
 		rgs.setLayoutParams(lp);
 		tabAdapter = new FragmentTabAdapter(this, fragments, R.id.tab_content,
 				rgs);
@@ -65,5 +66,21 @@ public class MainActivity extends FragmentActivity implements OnWebViewListener 
 					}
 				});
 
+	}
+
+	long mExitTime = 0;
+
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if ((System.currentTimeMillis() - mExitTime) > 2000) {
+				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+				mExitTime = System.currentTimeMillis();
+
+			} else {
+				finish();
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

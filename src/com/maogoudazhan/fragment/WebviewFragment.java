@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,6 +53,7 @@ public class WebviewFragment extends BaseFragment {
 	// public static WebviewFragment getInstance() {
 	// return SingletonHolder.instance;
 	// }
+	
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -73,6 +75,7 @@ public class WebviewFragment extends BaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		System.out.println("进入的webview-----------"+url);
 		mWebView.loadUrl(url);
 	}
 
@@ -122,8 +125,7 @@ public class WebviewFragment extends BaseFragment {
 		mWebView.getSettings().setDomStorageEnabled(true);
 		// 加这句话，去掉webview里面的缓存。。
 		if (isNetworkConnected(getActivity()))
-			mWebView.getSettings().setCacheMode(
-					WebSettings.LOAD_DEFAULT);
+			mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
 		else
 			mWebView.getSettings().setCacheMode(
 					WebSettings.LOAD_CACHE_ELSE_NETWORK);
