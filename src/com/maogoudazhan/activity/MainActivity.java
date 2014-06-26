@@ -42,15 +42,15 @@ public class MainActivity extends FragmentActivity implements OnWebViewListener 
 
 	public void ck(View v) {
 		if (v.getId() == R.id.tab_rb_a) {
-			onShowUrl(HomePageActivity.TUIJIAN_URL);
+			onShowUrl(LoadActivity.TUIJIAN_URL);
 		} else if (v.getId() == R.id.tab_rb_b) {
-			onShowUrl(HomePageActivity.ZILIAO_URL);
+			onShowUrl(LoadActivity.ZILIAO_URL);
 		} else if (v.getId() == R.id.tab_rb_c) {
-			onShowUrl(HomePageActivity.GONGLUE_URL);
+			onShowUrl(LoadActivity.GONGLUE_URL);
 		} else if (v.getId() == R.id.tab_rb_d) {
-			onShowUrl(HomePageActivity.CONFIG_URL);
+			onShowUrl(LoadActivity.CONFIG_URL);
 		} else if (v.getId() == R.id.tab_rb_e) {
-			onShowUrl(HomePageActivity.GENGDUO_URL);
+			onShowUrl(LoadActivity.GENGDUO_URL);
 		}
 	}
 
@@ -77,11 +77,11 @@ public class MainActivity extends FragmentActivity implements OnWebViewListener 
 		setContentView(R.layout.main);
 
 		// 五个tab对应的各个片段..
-		fragments.add(new WebviewFragment(HomePageActivity.TUIJIAN_URL));
-		fragments.add(new WebviewFragment(HomePageActivity.ZILIAO_URL));
-		fragments.add(new WebviewFragment(HomePageActivity.GONGLUE_URL));
-		fragments.add(new WebviewFragment(HomePageActivity.CONFIG_URL));
-		fragments.add(new WebviewFragment(HomePageActivity.GENGDUO_URL));
+		fragments.add(new WebviewFragment(LoadActivity.TUIJIAN_URL));
+		fragments.add(new WebviewFragment(LoadActivity.ZILIAO_URL));
+		fragments.add(new WebviewFragment(LoadActivity.GONGLUE_URL));
+		fragments.add(new WebviewFragment(LoadActivity.CONFIG_URL));
+		fragments.add(new WebviewFragment(LoadActivity.GENGDUO_URL));
 		float[] size = getScreen2();
 		System.out.println("宽度：" + size[0] + ",,--高度：" + size[1]);
 		rgs = (RadioGroup) findViewById(R.id.tabs_rg);

@@ -31,27 +31,7 @@ public class HomePageActivity extends TabActivity {
 	private float screenHeight = 0;
 	private float screenWidth = 0;
 	public static float barH = 0.05f;
-	/**
-	 * 推荐的url
-	 */
-	public static String TUIJIAN_URL = Constant.HOST + "/index.aspx?gameid=2";
-	/**
-	 * 资料的url
-	 */
-	public static String ZILIAO_URL = Constant.HOST + "/list.aspx?gameid=2";
-	/**
-	 * 攻略的url
-	 */
-	public static String GONGLUE_URL = Constant.HOST + "/guide.aspx?gameid=2";
-
-	/**
-	 * 更多的url
-	 */
-	public static String GENGDUO_URL = Constant.HOST + "/more.aspx?gameid=2";
-	/**
-	 * 配置的url
-	 */
-	public static String CONFIG_URL = Constant.HOST + "/setting.aspx?gameid=2";
+	
 
 	/**
 	 * 得到屏幕的高宽.
@@ -86,7 +66,7 @@ public class HomePageActivity extends TabActivity {
 		tabSpec.setIndicator(composeLayout(R.drawable.nav_tuijian_act,
 				screenWidth, screenHeight));
 		tabSpec.setContent(new Intent(HomePageActivity.this,
-				NewHomeActivity.class).putExtra("url", TUIJIAN_URL));
+				NewHomeActivity.class).putExtra("url", LoadActivity.TUIJIAN_URL));
 		tabHost.addTab(tabSpec);
 
 		// 设置第二个tab页的对应的intent布局
@@ -94,7 +74,7 @@ public class HomePageActivity extends TabActivity {
 		tabSpec2.setIndicator(composeLayout(R.drawable.nav_ziliao_off,
 				screenWidth, screenHeight));
 		tabSpec2.setContent(new Intent(HomePageActivity.this,
-				NewHomeActivity.class).putExtra("url", ZILIAO_URL));
+				NewHomeActivity.class).putExtra("url", LoadActivity.ZILIAO_URL));
 		tabHost.addTab(tabSpec2);
 
 		// 设置第三个tab页的对应的intent布局
@@ -102,7 +82,7 @@ public class HomePageActivity extends TabActivity {
 		tabSpec3.setIndicator(composeLayout(R.drawable.nav_gonglue_off,
 				screenWidth, screenHeight));
 		tabSpec3.setContent(new Intent(HomePageActivity.this,
-				NewHomeActivity.class).putExtra("url", GONGLUE_URL));
+				NewHomeActivity.class).putExtra("url", LoadActivity.GONGLUE_URL));
 		tabHost.addTab(tabSpec3);
 
 		// 设置第四个tab页的对应的intent布局
@@ -110,14 +90,14 @@ public class HomePageActivity extends TabActivity {
 		tabSpec4.setIndicator(composeLayout(R.drawable.nav_settings_off,
 				screenWidth, screenHeight));
 		tabSpec4.setContent(new Intent(HomePageActivity.this,
-				NewHomeActivity.class).putExtra("url", CONFIG_URL));
+				NewHomeActivity.class).putExtra("url", LoadActivity.CONFIG_URL));
 		tabHost.addTab(tabSpec4);
 
 		TabHost.TabSpec tabSpec5 = tabHost.newTabSpec(Tab5);
 		tabSpec5.setIndicator(composeLayout(R.drawable.nav_more_off,
 				screenWidth, screenHeight));
 		tabSpec5.setContent(new Intent(HomePageActivity.this,
-				NewHomeActivity.class).putExtra("url", GENGDUO_URL));
+				NewHomeActivity.class).putExtra("url", LoadActivity.GENGDUO_URL));
 		tabHost.addTab(tabSpec5);
 
 		// 这是对Tab标签本身的设置

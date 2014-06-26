@@ -25,9 +25,9 @@ public class MainActivity2 extends FragmentActivity implements
 
 	public String hello = "hello ";
 	MyFragmentTabAdapter tabAdapter;
-	private String[] urls = { HomePageActivity.TUIJIAN_URL,
-			HomePageActivity.ZILIAO_URL, HomePageActivity.GONGLUE_URL,
-			HomePageActivity.CONFIG_URL, HomePageActivity.GENGDUO_URL };
+	private String[] urls = { LoadActivity.TUIJIAN_URL,
+			LoadActivity.ZILIAO_URL, LoadActivity.GONGLUE_URL,
+			LoadActivity.CONFIG_URL, LoadActivity.GENGDUO_URL };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity2 extends FragmentActivity implements
 				return;
 			}
 			Bundle args = new Bundle();
-			args.putString(WebviewFragment.URL, HomePageActivity.TUIJIAN_URL);
+			args.putString(WebviewFragment.URL, LoadActivity.TUIJIAN_URL);
 			WebviewFragment webFragment = new WebviewFragment();
 			webFragment.setArguments(args);
 			getSupportFragmentManager().beginTransaction()
