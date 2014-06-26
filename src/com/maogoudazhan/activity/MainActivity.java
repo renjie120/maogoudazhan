@@ -74,7 +74,7 @@ public class MainActivity extends FragmentActivity implements OnWebViewListener 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.main);
+		setContentView(R.layout.main1);
 
 		// 五个tab对应的各个片段..
 		fragments.add(new WebviewFragment(LoadActivity.TUIJIAN_URL));

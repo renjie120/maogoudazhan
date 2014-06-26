@@ -32,7 +32,7 @@ public class LoadActivity extends Activity {
 	/**
 	 * 攻略的url
 	 */
-	public static String GONGLUE_URL =null;
+	public static String GONGLUE_URL = null;
 
 	/**
 	 * 更多的url
@@ -43,7 +43,15 @@ public class LoadActivity extends Activity {
 	 */
 	public static String CONFIG_URL = null;
 
-	static {
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		getWindow().setFormat(PixelFormat.RGBA_8888);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
+		setContentView(R.layout.load);
+
 		HttpUtils http = new HttpUtils();
 		RequestParams p = new RequestParams();
 		http.send(HttpRequest.HttpMethod.GET, Constant.HOST
@@ -65,31 +73,22 @@ public class LoadActivity extends Activity {
 						GONGLUE_URL = obj.getString("guide_url");
 						GENGDUO_URL = obj.getString("setting_url");
 						CONFIG_URL = obj.getString("more_url");
+						new Handler().postDelayed(new Runnable() {
+							public void run() {
+								// 经过指定时间之后自动跳转到后面的第一个首页面.
+								Intent mainIntent = new Intent(
+										LoadActivity.this,
+										MyTableActivity.class);
+								LoadActivity.this.startActivity(mainIntent);
+								LoadActivity.this.finish();
+							}
+						}, LOAD_DISPLAY_TIME);
 					}
 
 					@Override
 					public void onFailure(HttpException error, String msg) {
 					}
 				});
-	}
 
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		getWindow().setFormat(PixelFormat.RGBA_8888);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
-		setContentView(R.layout.load);
-
-		new Handler().postDelayed(new Runnable() {
-			public void run() {
-				// 经过指定时间之后自动跳转到后面的第一个首页面.
-				Intent mainIntent = new Intent(LoadActivity.this,
-						HomePageActivity.class);
-				LoadActivity.this.startActivity(mainIntent);
-				LoadActivity.this.finish();
-			}
-		}, LOAD_DISPLAY_TIME);
 	}
 }

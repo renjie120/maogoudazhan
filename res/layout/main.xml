@@ -1,95 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:gravity="bottom"
         android:orientation="vertical" >
 
         <FrameLayout
-            android:id="@+id/tab_content"
+            android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.0"
-            android:background="#77557799" />
+            android:layout_weight="1" />
 
-        <RadioGroup
-            android:id="@+id/tabs_rg"
+        <TabWidget
+            android:id="@android:id/tabs"
             android:layout_width="fill_parent"
-            android:layout_height="100dp"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/tab_rb_a"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:background="@drawable/selector_tab1"
-                android:button="@null"
-                android:checked="true"
-                android:gravity="center"
-                android:onClick="ck"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="13sp" />
-
-            <RadioButton
-                android:id="@+id/tab_rb_b"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:background="@drawable/selector_tab2"
-                android:button="@null"
-                android:gravity="center"
-                android:onClick="ck"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="13sp" />
-
-            <RadioButton
-                android:id="@+id/tab_rb_c"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:background="@drawable/selector_tab3"
-                android:button="@null"
-                android:gravity="center"
-                android:onClick="ck"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="13sp" />
-
-            <RadioButton
-                android:id="@+id/tab_rb_d"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:background="@drawable/selector_tab4"
-                android:button="@null"
-                android:gravity="center"
-                android:onClick="ck"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="13sp" />
-
-            <RadioButton
-                android:id="@+id/tab_rb_e"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1.0"
-                android:background="@drawable/selector_tab5"
-                android:button="@null"
-                android:gravity="center"
-                android:onClick="ck"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="13sp" />
-        </RadioGroup>
+            android:layout_height="wrap_content"
+            android:cacheColorHint="#00000000" >
+        </TabWidget>
     </LinearLayout>
 
-</LinearLayout>
+</TabHost>

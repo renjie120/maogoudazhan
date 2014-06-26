@@ -33,7 +33,7 @@ public class MainActivity2 extends FragmentActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.main);
+		setContentView(R.layout.main1);
 
 		// 五个tab对应的各个片段..
 		rgs = (RadioGroup) findViewById(R.id.tabs_rg);
