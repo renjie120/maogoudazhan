@@ -29,8 +29,7 @@ public class HomePageActivity extends TabActivity {
 	private static final String Tab2 = "Tab2";
 	private static final String Tab3 = "Tab3";
 	private static final String Tab4 = "Tab4";
-	private static final String Tab5 = "Tab5";
-	private String token, loginUser;
+	private static final String Tab5 = "Tab5"; 
 	private float screenHeight = 0;
 	private float screenWidth = 0;
 	public static float barH = 0.05f;
@@ -67,10 +66,7 @@ public class HomePageActivity extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.old_main);
-		Intent intent = getIntent();
-		token = intent.getStringExtra("token");
-		loginUser = intent.getStringExtra("loginUser");
+		setContentView(R.layout.old_main); 
 
 		float[] screen2 = getScreen2();
 		screenHeight = screen2[1];

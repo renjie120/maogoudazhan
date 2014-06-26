@@ -8,10 +8,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabWidget;
 import android.widget.TextView;
@@ -61,7 +63,8 @@ public class MyTableActivity extends TabActivity {
 		tabSpec.setContent(new Intent(MyTableActivity.this,
 				NewHomeActivity.class)
 				.putExtra("url", LoadActivity.TUIJIAN_URL));
-		tabHost.addTab(tabSpec);
+		tabHost.addTab(tabSpec); 
+	 
 
 		// 设置第二个tab页的对应的intent布局
 		TabHost.TabSpec tabSpec2 = tabHost.newTabSpec(Tab2);
@@ -79,14 +82,14 @@ public class MyTableActivity extends TabActivity {
 		tabHost.addTab(tabSpec3);
 
 		// 设置第三个tab页的对应的intent布局
-		TabHost.TabSpec tabSpec4 = tabHost.newTabSpec(Tab3);
+		TabHost.TabSpec tabSpec4 = tabHost.newTabSpec(Tab4);
 		tabSpec4.setIndicator(composeLayout("配置", R.drawable.tab_4_off));
 		tabSpec4.setContent(new Intent(MyTableActivity.this,
-				NewHomeActivity.class).putExtra("url", LoadActivity.CONFIG_URL));
+				NewHomeActivity.class).putExtra("url", LoadActivity.CONFIG_URL)); 
 		tabHost.addTab(tabSpec4);
 
 		// 设置第三个tab页的对应的intent布局
-		TabHost.TabSpec tabSpec5 = tabHost.newTabSpec(Tab3);
+		TabHost.TabSpec tabSpec5 = tabHost.newTabSpec(Tab5);
 		tabSpec5.setIndicator(composeLayout("更多", R.drawable.tab_5_off));
 		tabSpec5.setContent(new Intent(MyTableActivity.this,
 				NewHomeActivity.class)
@@ -98,7 +101,7 @@ public class MyTableActivity extends TabActivity {
 		for (int i = 0; i < tabWidget.getChildCount(); i++) {
 			// 设置高度、宽度，不过宽度由于设置为fill_parent，在此对它没效果
 			tabWidget.getChildAt(i).getLayoutParams().height = height;
-			View v = tabWidget.getChildAt(i);
+			View v = tabWidget.getChildAt(i); 
 			if (tabHost.getCurrentTab() == i) {
 				v.setBackgroundDrawable(getResources().getDrawable(
 						R.drawable.dot9_tab_on));
@@ -107,7 +110,7 @@ public class MyTableActivity extends TabActivity {
 						R.drawable.dot9_tab_off));
 			}
 		}
-
+		 
 		// 设置Tab变换时的监听事件
 		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
@@ -155,6 +158,23 @@ public class MyTableActivity extends TabActivity {
 		tv.setCompoundDrawables(null, img_off, null, null);
 	}
 
+	long mExitTime = 0;
+
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		System.out.println("回退按钮11。。。");
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			System.out.println("回退按钮。。。");
+			if ((System.currentTimeMillis() - mExitTime) > 2000) {
+				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+				mExitTime = System.currentTimeMillis();
+
+			} else {
+				finish();
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 	/**
 	 * 动态生成下面的tab底部图标的布局.
 	 * 
