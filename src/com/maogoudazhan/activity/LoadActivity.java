@@ -78,7 +78,7 @@ public class LoadActivity extends Activity {
 								// 经过指定时间之后自动跳转到后面的第一个首页面.
 								Intent mainIntent = new Intent(
 										LoadActivity.this,
-										NewHomeActivity.class);
+										MyTableActivity.class);
 								LoadActivity.this.startActivity(mainIntent);
 								LoadActivity.this.finish();
 							}

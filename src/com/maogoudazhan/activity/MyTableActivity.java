@@ -206,7 +206,7 @@ public class MyTableActivity extends TabActivity {
 		setTextImg(tv, i);
 		LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.FILL_PARENT, 0, 1);
-		lp2.setMargins(0, 5, 0, 5);
+		lp2.setMargins(0, 8, 0, 5);
 		tv.setLayoutParams(lp2);
 		layout.addView(tv);
 		return layout;
