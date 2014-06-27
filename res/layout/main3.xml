@@ -22,6 +22,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:background="#00ff00"
             android:orientation="horizontal" >
 
             <RadioButton
@@ -29,12 +30,14 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
-                android:background="@drawable/dot9_tab_on"
+                android:background="@drawable/selector_tab"
                 android:button="@null"
                 android:checked="true"
+                android:drawableTop="@drawable/tab_1_off"
                 android:gravity="center"
                 android:onClick="ck"
                 android:singleLine="true"
+                android:text="推荐"
                 android:textColor="#000000"
                 android:textSize="13sp" />
 
@@ -43,52 +46,43 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
-                android:background="@drawable/dot9_tab_off"
+                android:background="@drawable/selector_tab"
                 android:button="@null"
+                android:checked="true"
+                android:drawableTop="@drawable/tab_2_off"
                 android:gravity="center"
                 android:onClick="ck"
                 android:singleLine="true"
+                android:text="资料"
                 android:textColor="#000000"
                 android:textSize="13sp" />
 
             <RadioButton
                 android:id="@+id/tab_rb_c"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
+                style="@style/MMTabButton"
                 android:layout_weight="1.0"
-                android:background="@drawable/dot9_tab_off"
-                android:button="@null"
-                android:gravity="center"
+                android:checked="true"
+                android:drawableTop="@drawable/tab_3_off"
                 android:onClick="ck"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="13sp" />
+                android:text="攻略" />
 
             <RadioButton
                 android:id="@+id/tab_rb_d"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
+                style="@style/MMTabButton"
                 android:layout_weight="1.0"
-                android:background="@drawable/dot9_tab_off"
-                android:button="@null"
-                android:gravity="center"
+                android:checked="true"
+                android:drawableTop="@drawable/tab_4_off"
                 android:onClick="ck"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="13sp" />
+                android:text="设置" />
 
             <RadioButton
                 android:id="@+id/tab_rb_e"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
+                style="@style/MMTabButton"
                 android:layout_weight="1.0"
-                android:background="@drawable/dot9_tab_off"
-                android:button="@null"
-                android:gravity="center"
+                android:checked="true"
+                android:drawableTop="@drawable/tab_5_off"
                 android:onClick="ck"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="13sp" />
+                android:text="更多" />
         </RadioGroup>
     </LinearLayout>
 

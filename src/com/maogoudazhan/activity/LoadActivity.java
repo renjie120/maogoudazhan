@@ -71,14 +71,14 @@ public class LoadActivity extends Activity {
 						TUIJIAN_URL = obj.getString("index_url");
 						ZILIAO_URL = obj.getString("info_url");
 						GONGLUE_URL = obj.getString("guide_url");
-						GENGDUO_URL = obj.getString("setting_url");
-						CONFIG_URL = obj.getString("more_url");
+						CONFIG_URL = obj.getString("setting_url");
+						GENGDUO_URL = obj.getString("more_url");
 						new Handler().postDelayed(new Runnable() {
 							public void run() {
 								// 经过指定时间之后自动跳转到后面的第一个首页面.
 								Intent mainIntent = new Intent(
 										LoadActivity.this,
-										MyTableActivity.class);
+										NewHomeActivity.class);
 								LoadActivity.this.startActivity(mainIntent);
 								LoadActivity.this.finish();
 							}

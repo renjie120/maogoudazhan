@@ -8,13 +8,16 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 签到界面.采用tab的布局方式.
@@ -40,6 +43,22 @@ public class MyTableActivity extends TabActivity {
 		DisplayMetrics dm = new DisplayMetrics();
 		dm = getResources().getDisplayMetrics();
 		return new float[] { dm.widthPixels, dm.heightPixels };
+	}
+
+	long mExitTime = 0;
+
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if ((System.currentTimeMillis() - mExitTime) > 2000) {
+				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+				mExitTime = System.currentTimeMillis();
+
+			} else {
+				finish();
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 	/** Called when the activity is first created. */
@@ -79,14 +98,14 @@ public class MyTableActivity extends TabActivity {
 		tabHost.addTab(tabSpec3);
 
 		// 设置第三个tab页的对应的intent布局
-		TabHost.TabSpec tabSpec4 = tabHost.newTabSpec(Tab3);
+		TabHost.TabSpec tabSpec4 = tabHost.newTabSpec(Tab4);
 		tabSpec4.setIndicator(composeLayout("配置", R.drawable.tab_4_off));
 		tabSpec4.setContent(new Intent(MyTableActivity.this,
 				NewHomeActivity.class).putExtra("url", LoadActivity.CONFIG_URL));
 		tabHost.addTab(tabSpec4);
 
 		// 设置第三个tab页的对应的intent布局
-		TabHost.TabSpec tabSpec5 = tabHost.newTabSpec(Tab3);
+		TabHost.TabSpec tabSpec5 = tabHost.newTabSpec(Tab5);
 		tabSpec5.setIndicator(composeLayout("更多", R.drawable.tab_5_off));
 		tabSpec5.setContent(new Intent(MyTableActivity.this,
 				NewHomeActivity.class)
@@ -107,7 +126,6 @@ public class MyTableActivity extends TabActivity {
 						R.drawable.dot9_tab_off));
 			}
 		}
-
 		// 设置Tab变换时的监听事件
 		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
@@ -116,6 +134,13 @@ public class MyTableActivity extends TabActivity {
 					View v = tabWidget.getChildAt(i);
 					LinearLayout layout = (LinearLayout) v;
 					TextView iv = (TextView) layout.getChildAt(0);
+					if (tabHost.getCurrentTab() == i) {
+						v.setBackgroundDrawable(getResources().getDrawable(
+								R.drawable.dot9_tab_on));
+					} else {
+						v.setBackgroundDrawable(getResources().getDrawable(
+								R.drawable.dot9_tab_off));
+					}
 					if (tabHost.getCurrentTab() == i) {
 						if (i == 0)
 							setTextImg(iv, R.drawable.tab_1_on);
@@ -142,7 +167,8 @@ public class MyTableActivity extends TabActivity {
 				}
 			}
 		});
-
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);  
+        tabWidget.setLayoutParams(params);   
 	}
 
 	private void setTextImg(TextView tv, int i) {
@@ -150,8 +176,8 @@ public class MyTableActivity extends TabActivity {
 		Resources res = getResources();
 		img_off = res.getDrawable(i);
 		// 调用setCompoundDrawables时，必须调用Drawable.setBounds()方法,否则图片不显示
-		img_off.setBounds(0, 0, (int)(img_off.getMinimumWidth()*0.8),
-				(int)(img_off.getMinimumHeight()*0.8));
+		img_off.setBounds(0, 4, (int) (img_off.getMinimumWidth() * 0.6),
+				(int) (img_off.getMinimumHeight() * 0.6));
 		tv.setCompoundDrawables(null, img_off, null, null);
 	}
 
@@ -162,10 +188,15 @@ public class MyTableActivity extends TabActivity {
 	 * @param i
 	 * @return
 	 */
-	public View composeLayout(String s, int i) {
+	public View composeLayout(final String s, int i) {
 		LinearLayout layout = new LinearLayout(this);
+//		layout.set
 		layout.setOrientation(LinearLayout.VERTICAL);
-
+		layout.setPadding(0, 0, 0, 0);
+		LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(
+				(int)(screenWidth/5.0),
+				LinearLayout.LayoutParams.FILL_PARENT);
+		layout.setLayoutParams(lp3);
 		TextView tv = new TextView(this);
 		tv.setGravity(Gravity.CENTER);
 		tv.setSingleLine(true);

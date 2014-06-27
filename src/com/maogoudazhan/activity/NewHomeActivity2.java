@@ -5,10 +5,8 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.maogoudazhan.fragment.WebviewFragment;
 
@@ -18,7 +16,7 @@ import com.maogoudazhan.fragment.WebviewFragment;
  * @author 130126
  * 
  */
-public class NewHomeActivity extends FragmentActivity implements
+public class NewHomeActivity2 extends FragmentActivity implements
 		WebviewFragment.OnWebViewListener {
 	// 变量：登陆用户，token
 	private String url;
@@ -46,23 +44,6 @@ public class NewHomeActivity extends FragmentActivity implements
 		return null;
 	}
 
-	long mExitTime = 0;
-
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if ((System.currentTimeMillis() - mExitTime) > 2000) {
-				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
-				mExitTime = System.currentTimeMillis();
-
-			} else {
-				finish();
-			}
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-	}
- 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,10 +52,10 @@ public class NewHomeActivity extends FragmentActivity implements
 		setContentView(R.layout.new_home);
 		all = (LinearLayout) findViewById(R.id.all);
 		url = getIntent().getStringExtra("url");
-		// 设置第一个tab的片段.
+		//设置第一个tab的片段.
 		Bundle args = new Bundle();
 		args.putString(WebviewFragment.URL, url);
-		WebviewFragment newFragment = new WebviewFragment();// .getInstance();
+		WebviewFragment newFragment =new WebviewFragment();//.getInstance();
 		FragmentTransaction transaction = getSupportFragmentManager()
 				.beginTransaction();
 		// 设置参数
