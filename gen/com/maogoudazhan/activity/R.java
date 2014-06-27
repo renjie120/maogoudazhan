@@ -21,6 +21,7 @@ public final class R {
     public static final class color {
         public static final int blue=0x7f050001;
         public static final int homepage_bottom=0x7f050000;
+        public static final int textcolor=0x7f050002;
     }
     public static final class drawable {
         public static final int dot9_tab_off=0x7f020000;

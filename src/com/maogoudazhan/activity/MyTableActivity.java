@@ -76,7 +76,7 @@ public class MyTableActivity extends TabActivity {
 
 		// 设置第一个tab页的对应的intent布局
 		TabHost.TabSpec tabSpec = tabHost.newTabSpec(Tab1);
-		tabSpec.setIndicator(composeLayout("推荐", R.drawable.tab_1_on));
+		tabSpec.setIndicator(composeLayout("推荐", R.drawable.tab_1_on, true));
 		tabSpec.setContent(new Intent(MyTableActivity.this,
 				NewHomeActivity.class)
 				.putExtra("url", LoadActivity.TUIJIAN_URL));
@@ -84,14 +84,14 @@ public class MyTableActivity extends TabActivity {
 
 		// 设置第二个tab页的对应的intent布局
 		TabHost.TabSpec tabSpec2 = tabHost.newTabSpec(Tab2);
-		tabSpec2.setIndicator(composeLayout("资料", R.drawable.tab_2_off));
+		tabSpec2.setIndicator(composeLayout("资料", R.drawable.tab_2_off, false));
 		tabSpec2.setContent(new Intent(MyTableActivity.this,
 				NewHomeActivity.class).putExtra("url", LoadActivity.ZILIAO_URL));
 		tabHost.addTab(tabSpec2);
 
 		// 设置第三个tab页的对应的intent布局
 		TabHost.TabSpec tabSpec3 = tabHost.newTabSpec(Tab3);
-		tabSpec3.setIndicator(composeLayout("攻略", R.drawable.tab_3_off));
+		tabSpec3.setIndicator(composeLayout("攻略", R.drawable.tab_3_off, false));
 		tabSpec3.setContent(new Intent(MyTableActivity.this,
 				NewHomeActivity.class)
 				.putExtra("url", LoadActivity.GONGLUE_URL));
@@ -99,14 +99,14 @@ public class MyTableActivity extends TabActivity {
 
 		// 设置第三个tab页的对应的intent布局
 		TabHost.TabSpec tabSpec4 = tabHost.newTabSpec(Tab4);
-		tabSpec4.setIndicator(composeLayout("配置", R.drawable.tab_4_off));
+		tabSpec4.setIndicator(composeLayout("设置", R.drawable.tab_4_off, false));
 		tabSpec4.setContent(new Intent(MyTableActivity.this,
 				NewHomeActivity.class).putExtra("url", LoadActivity.CONFIG_URL));
 		tabHost.addTab(tabSpec4);
 
 		// 设置第三个tab页的对应的intent布局
 		TabHost.TabSpec tabSpec5 = tabHost.newTabSpec(Tab5);
-		tabSpec5.setIndicator(composeLayout("更多", R.drawable.tab_5_off));
+		tabSpec5.setIndicator(composeLayout("更多", R.drawable.tab_5_off, false));
 		tabSpec5.setContent(new Intent(MyTableActivity.this,
 				NewHomeActivity.class)
 				.putExtra("url", LoadActivity.GENGDUO_URL));
@@ -133,13 +133,15 @@ public class MyTableActivity extends TabActivity {
 				for (int i = 0; i < tabWidget.getChildCount(); i++) {
 					View v = tabWidget.getChildAt(i);
 					LinearLayout layout = (LinearLayout) v;
-					TextView iv = (TextView) layout.getChildAt(0);
+					TextView iv = (TextView) layout.getChildAt(0); 
 					if (tabHost.getCurrentTab() == i) {
 						v.setBackgroundDrawable(getResources().getDrawable(
 								R.drawable.dot9_tab_on));
+						iv.setTextColor(Color.WHITE);
 					} else {
 						v.setBackgroundDrawable(getResources().getDrawable(
 								R.drawable.dot9_tab_off));
+						iv.setTextColor(R.color.textcolor);
 					}
 					if (tabHost.getCurrentTab() == i) {
 						if (i == 0)
@@ -167,8 +169,9 @@ public class MyTableActivity extends TabActivity {
 				}
 			}
 		});
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);  
-        tabWidget.setLayoutParams(params);   
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		tabWidget.setLayoutParams(params);
 	}
 
 	private void setTextImg(TextView tv, int i) {
@@ -188,13 +191,13 @@ public class MyTableActivity extends TabActivity {
 	 * @param i
 	 * @return
 	 */
-	public View composeLayout(final String s, int i) {
+	public View composeLayout(final String s, int i, boolean isChecked) {
 		LinearLayout layout = new LinearLayout(this);
-//		layout.set
+		// layout.set
 		layout.setOrientation(LinearLayout.VERTICAL);
 		layout.setPadding(0, 0, 0, 0);
 		LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(
-				(int)(screenWidth/5.0),
+				(int) (screenWidth / 5.0),
 				LinearLayout.LayoutParams.FILL_PARENT);
 		layout.setLayoutParams(lp3);
 		TextView tv = new TextView(this);
@@ -202,7 +205,11 @@ public class MyTableActivity extends TabActivity {
 		tv.setSingleLine(true);
 		tv.setText(s);
 		tv.setTextSize(12);
-		tv.setTextColor(Color.WHITE);
+		if (isChecked)
+			tv.setTextColor(Color.WHITE);
+		else
+			tv.setTextColor(R.color.textcolor);
+
 		setTextImg(tv, i);
 		LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.FILL_PARENT, 0, 1);
