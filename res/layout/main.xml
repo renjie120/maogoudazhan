@@ -19,10 +19,9 @@
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" 
-            android:layout_margin="0dp"
-            android:background="@color/blue"
-            android:padding="0dp" >
+            android:layout_height="wrap_content"  
+            android:divider="@null"
+            android:background="@color/blue" > 
         </TabWidget>
     </LinearLayout>
 
